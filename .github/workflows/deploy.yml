@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: checkout source code
         uses: actions/checkout@v1
+      - name: zip source code
+        run: zip function.zip aws-python-simple-http-endpoint/*  
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
@@ -15,4 +17,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: eu-central-1
           function_name: deploy-test
-          source: aws-python-simple-http-endpoint/handler.py
+          zip_file: function.zip
